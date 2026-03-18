@@ -1,0 +1,372 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 43 35% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 43 35% 50%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 43 35% 50%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 3%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 43 35% 50%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 43 35% 50%;
+    
+    /* Custom luxury colors */
+    --gold: #ac9455;
+    --gold-light: #d7bd6a;
+    --gold-dark: #8a763f;
+    --luxury-black: #000000;
+    --luxury-white: #ffffff;
+    --luxury-cream: #f8f3e8;
+    --luxury-gray: #4a4a4a;
+    --luxury-lightgray: #e9e9e9;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-black text-white font-body antialiased;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--gold), var(--gold-dark));
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--gold-light);
+  }
+}
+
+@layer components {
+  /* Gold text gradient */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #ac9455 0%, #d7bd6a 50%, #ac9455 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Gold border gradient */
+  .border-gold-gradient {
+    border-image: linear-gradient(135deg, #ac9455 0%, #d7bd6a 50%, #ac9455 100%) 1;
+  }
+  
+  /* Luxury button styles */
+  .btn-luxury {
+    @apply relative overflow-hidden px-8 py-3 border border-gold text-gold font-body font-medium tracking-wider uppercase text-sm transition-all duration-500 bg-transparent;
+  }
+  
+  .btn-luxury::before {
+    content: '';
+    @apply absolute inset-0 bg-gold transform -translate-x-full transition-transform duration-500;
+  }
+  
+  .btn-luxury:hover::before {
+    @apply translate-x-0;
+  }
+  
+  .btn-luxury:hover {
+    @apply text-black;
+  }
+  
+  .btn-luxury span {
+    @apply relative z-10;
+  }
+  
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+  
+  .glass-dark {
+    @apply bg-black/50 backdrop-blur-xl border border-white/5;
+  }
+  
+  /* Section padding */
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 xl:px-16 2xl:px-24;
+  }
+  
+  /* Gold glow effect */
+  .glow-gold {
+    box-shadow: 0 0 30px rgba(172, 148, 85, 0.3);
+  }
+  
+  .glow-gold-lg {
+    box-shadow: 0 0 60px rgba(172, 148, 85, 0.4);
+  }
+  
+  /* Luxury card */
+  .card-luxury {
+    @apply bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 backdrop-blur-sm;
+  }
+  
+  /* Input luxury style */
+  .input-luxury {
+    @apply bg-white/5 border border-white/20 text-white placeholder:text-white/40 focus:border-gold focus:ring-1 focus:ring-gold transition-all duration-300;
+  }
+  
+  /* Noise texture overlay */
+  .noise-overlay::after {
+    content: '';
+    @apply absolute inset-0 pointer-events-none opacity-[0.03];
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+  
+  /* Magnetic button effect base */
+  .magnetic-btn {
+    @apply transition-transform duration-200 ease-out;
+  }
+  
+  /* Reveal animation */
+  .reveal {
+    @apply opacity-0 translate-y-8;
+  }
+  
+  .reveal.active {
+    @apply opacity-100 translate-y-0 transition-all duration-700;
+  }
+  
+  /* Stagger children animation */
+  .stagger-children > * {
+    @apply opacity-0 translate-y-4;
+  }
+  
+  .stagger-children.active > *:nth-child(1) { animation: fade-up 0.6s 0.1s ease-out forwards; }
+  .stagger-children.active > *:nth-child(2) { animation: fade-up 0.6s 0.2s ease-out forwards; }
+  .stagger-children.active > *:nth-child(3) { animation: fade-up 0.6s 0.3s ease-out forwards; }
+  .stagger-children.active > *:nth-child(4) { animation: fade-up 0.6s 0.4s ease-out forwards; }
+  .stagger-children.active > *:nth-child(5) { animation: fade-up 0.6s 0.5s ease-out forwards; }
+  .stagger-children.active > *:nth-child(6) { animation: fade-up 0.6s 0.6s ease-out forwards; }
+
+  /* Gold line animation */
+  .gold-line {
+    transform-origin: left;
+  }
+
+  /* Product card hover */
+  .product-card {
+    @apply transition-all duration-500;
+  }
+
+  .product-card:hover {
+    @apply -translate-y-2;
+    box-shadow: 0 25px 50px -12px rgba(172, 148, 85, 0.15);
+  }
+
+  /* Shimmer effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+}
+
+@layer utilities {
+  /* Custom easing */
+  .ease-expo {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .ease-smooth {
+    transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  
+  /* Text stroke */
+  .text-stroke {
+    -webkit-text-stroke: 1px currentColor;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  /* Hide scrollbar but keep functionality */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Perspective for 3D effects */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  /* Line clamp */
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Lenis smooth scroll */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulse-gold {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(172, 148, 85, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(172, 148, 85, 0.6);
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 2s ease-in-out infinite;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(172, 148, 85, 0.3);
+  color: #fff;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid #ac9455;
+  outline-offset: 2px;
+}
+
+/* Input number hide arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
